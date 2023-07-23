@@ -14,3 +14,11 @@ export interface Section {
   AdditionalText: string;
   AdditionalText2: string;
 }
+
+export interface Price {
+  Price: number;
+  ZoneId: number;
+  PackageId: number;
+  PerformanceId: number;
+  PriceTypeId: number;
+}

@@ -1,11 +1,15 @@
 import { Ticket } from "src/models/entities.js";
-import ticketApi from "../api/ticketApi.js";
+import ticketApi from "../api/ticket.api.js";
+import sectionService from "./sections/sections.service.js";
+import pricesService from "./prices/prices.service.js";
+import sectionsService from "./sections/sections.service.js";
 
 const ticketService = async () => {
   async function getTickets(eventId: number): Promise<Ticket[]> {
     const seats = await ticketApi.fetchSeats(eventId);
-    const prices = await ticketApi.fetchPrices(eventId);
-    const sections = await ticketApi.fetchSections();
+
+    await sectionService.fetchSections();
+    await pricesService.fetchPrices(eventId);
 
     return seats
       .filter((seat) => seat.SeatStatusId === 0)
@@ -14,13 +18,8 @@ const ticketService = async () => {
           Id: seat.Id,
           SeatRow: seat.SeatRow,
           SeatNumber: seat.SeatNumber,
-          Price:
-            prices.find(
-              (price) =>
-                price.ZoneId === seat.ZoneId && price.PerformanceId === 0
-            )?.Price || 0,
-          Section:
-            sections.find((section) => section.Id === seat.SectionId) || null,
+          Price: pricesService.findPriceByZoneId(seat.ZoneId).Price,
+          Section: sectionsService.findSectionById(seat.SectionId),
         };
       });
   }

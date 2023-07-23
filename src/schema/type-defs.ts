@@ -9,12 +9,12 @@ export const typeDefs = `
   }
   
   type Section {
-    Id: Int!
+    Id: Int
     Description: String!
     PrintDesc: String!
     SectionLegend: String!
-    AdditionalText: String!
-    AdditionalText2: String!
+    AdditionalText: String
+    AdditionalText2: String
   }
 
   type Query {

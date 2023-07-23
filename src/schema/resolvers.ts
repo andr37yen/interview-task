@@ -1,4 +1,4 @@
-import ticketService from "../services/ticketService.js";
+import ticketService from "../services/ticket.service.js";
 
 export const resolvers = {
   Query: {
