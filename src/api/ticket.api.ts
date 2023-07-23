@@ -7,10 +7,12 @@ import {
 } from "src/models/dtos.js";
 
 const ticketApi = () => {
+  const domain = process.env.DOMAIN || "https://my.laphil.com";
+
   const fetchPrices = async (packegeId: Number): Promise<PriceDto[]> => {
     try {
       const res = await axios.get(
-        `https://my.laphil.com/en/rest-proxy/TXN/Packages/${packegeId}/Prices`
+        `${domain}/en/rest-proxy/TXN/Packages/${packegeId}/Prices`
       );
 
       return res.data;
@@ -22,7 +24,7 @@ const ticketApi = () => {
   const fetchSeats = async (packegeId: Number): Promise<SeatsDto[]> => {
     try {
       const res = await axios.get(
-        `https://my.laphil.com/en/rest-proxy/TXN/Packages/${packegeId}/Seats?constituentId=0&modeOfSaleId=26`
+        `${domain}/en/rest-proxy/TXN/Packages/${packegeId}/Seats?constituentId=0&modeOfSaleId=26`
       );
 
       return res.data;
@@ -34,7 +36,7 @@ const ticketApi = () => {
   const fetchSections = async (): Promise<SectionDto[]> => {
     try {
       const res = await axios.get(
-        `https://my.laphil.com/en/rest-proxy/ReferenceData/Sections`
+        `${domain}/en/rest-proxy/ReferenceData/Sections`
       );
       return res.data;
     } catch (error) {
@@ -45,7 +47,7 @@ const ticketApi = () => {
   const fetchSeatStatuses = async (): Promise<SeatStatusDto[]> => {
     try {
       const res = await axios.get(
-        `https://my.laphil.com/en/rest-proxy/ReferenceData/SeatStatuses`
+        `${domain}/en/rest-proxy/ReferenceData/SeatStatuses`
       );
 
       return res.data;
