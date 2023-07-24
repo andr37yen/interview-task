@@ -3,11 +3,11 @@ export const priceMock = {
   PackageId: 1919,
   PerformanceId: 0,
   PriceTypeId: 3,
-  ZoneId: 2
+  ZoneId: 4
 };
 
 export const seatMock = {
-  Id: 4,
+  Id: 13331,
   SeatNumber: "131",
   SeatRow: "B",
   ZoneId: 4,
@@ -22,7 +22,7 @@ export const seatStatusMock  = {
 }
 
 export const sectionMock = {
-  Id: 2,
+  Id: 907,
   Description: "",
   PrintDesc: "",
   SectionLegend: "",
@@ -31,7 +31,7 @@ export const sectionMock = {
 }
 
 export const ticketMock = {
-  Id: 4,
+  Id: 13331,
   SeatRow: "B",
   SeatNumber: "131",
   Price: 100,

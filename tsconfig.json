@@ -44,8 +44,8 @@
     "jsx": "react",
     "resolveJsonModule": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"],
+  "include": ["src/**/*", "src/resolvers/resolvers.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"

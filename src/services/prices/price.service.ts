@@ -1,7 +1,7 @@
 import ticketApi from "../../api/ticket.api";
 import { PriceDto } from "../../models/dtos";
 
-const pricesService = () => {
+const priceService = () => {
   let prices: PriceDto[] = [];
 
   const fetchPrices = async (packageId: Number): Promise<PriceDto[]> => {
@@ -31,4 +31,4 @@ const pricesService = () => {
   });
 };
 
-export default pricesService();
+export default priceService();

@@ -21,7 +21,7 @@ describe("pricesService", () => {
   });
 
   it("should return price if found otherwise it throws", async () => {
-    const validZoneId = 2;
+    const validZoneId = 4;
     const packageId = 1919;
 
     (ticketApi.fetchPrices as jest.Mock).mockResolvedValueOnce([priceMock]);

@@ -9,7 +9,7 @@ export default async (): Promise<Config.InitialOptions> => {
    },
    verbose: true,
    setupFiles: ["dotenv/config"],
-   testMatch: ["**/**/*.spec.ts"],
+   testMatch: ["**/**/*.spec.ts", "**/**/*.test.ts"],
    testEnvironment: "node",
    detectOpenHandles: true,
    collectCoverage: false,

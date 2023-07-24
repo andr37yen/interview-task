@@ -19,7 +19,7 @@ describe("pricesService", () => {
   });
 
   it("should return section if found otherwise it throws", async () => {
-    const sectionId = 2;
+    const sectionId = 907;
 
     (ticketApi.fetchSections as jest.Mock).mockResolvedValueOnce([sectionMock]);
     await sectionService.fetchSections();
