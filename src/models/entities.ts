@@ -3,7 +3,7 @@ export interface Ticket {
   SeatRow: string;
   SeatNumber: string;
   Price: number;
-  Section: Section | null;
+  Section: Section;
 }
 
 export interface Section {

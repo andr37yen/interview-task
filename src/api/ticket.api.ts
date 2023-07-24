@@ -2,9 +2,9 @@ import axios from "axios";
 import {
   PriceDto,
   SeatStatusDto,
-  SeatsDto,
+  SeatDto,
   SectionDto,
-} from "src/models/dtos.js";
+} from "src/models/dtos";
 
 const ticketApi = () => {
   const domain = process.env.DOMAIN || "https://my.laphil.com";
@@ -21,7 +21,7 @@ const ticketApi = () => {
     }
   };
 
-  const fetchSeats = async (packegeId: Number): Promise<SeatsDto[]> => {
+  const fetchSeats = async (packegeId: Number): Promise<SeatDto[]> => {
     try {
       const res = await axios.get(
         `${domain}/en/rest-proxy/TXN/Packages/${packegeId}/Seats?constituentId=0&modeOfSaleId=26`

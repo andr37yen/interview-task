@@ -1,8 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import dotenv from "dotenv";
-import { resolvers } from "./schema/resolvers.js";
-import { typeDefs } from "./schema/type-defs.js";
+import { resolvers } from "./schema/resolvers";
+import { typeDefs } from "./schema/type-defs";
 
 dotenv.config();
 

@@ -1,4 +1,3 @@
-
 export const typeDefs = `
   type Ticket {
     Id: Int!

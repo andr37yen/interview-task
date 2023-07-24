@@ -1,10 +1,10 @@
-import { Ticket } from "src/models/entities.js";
-import ticketApi from "../api/ticket.api.js";
-import sectionService from "./sections/sections.service.js";
-import pricesService from "./prices/prices.service.js";
-import sectionsService from "./sections/sections.service.js";
+import { Ticket } from "../../models/entities";
+import ticketApi from "../../api/ticket.api";
+import sectionService from "../sections/section.service";
+import pricesService from "../prices/price.service";
+import sectionsService from "../sections/section.service";
 
-const ticketService = async () => {
+const ticketService = () => {
   async function getTickets(eventId: number): Promise<Ticket[]> {
     const seats = await ticketApi.fetchSeats(eventId);
 
@@ -27,4 +27,4 @@ const ticketService = async () => {
   return Object.freeze({ getTickets });
 };
 
-export default await ticketService();
+export default ticketService();

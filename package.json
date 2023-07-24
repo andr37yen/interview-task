@@ -2,13 +2,13 @@
   "name": "interview-task",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build & node ./dist",
-    "start:dev": "tsc-watch --onSuccess \"node ./dist/\"",
+    "start": "ts-node src/index",
+    "start:dev": "nodemon",
     "test": "jest",
-    "test:dev": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "test:cov": "jest --collect-coverage"
   },
   "type": "module",
   "keywords": [],
@@ -23,7 +23,10 @@
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.1.6"
   },

@@ -13,12 +13,12 @@ export interface SectionDto {
   AdditionalText2: string;
 }
 
-export interface SeatsDto {
+export interface SeatDto {
   Id: number;
   SeatNumber: string;
   SeatRow: string;
   ZoneId: number;
-  SectionId: number
+  SectionId: number;
   SeatStatusId: number;
 }
 

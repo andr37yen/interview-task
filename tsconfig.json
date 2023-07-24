@@ -2,12 +2,15 @@
   "compilerOptions": {
     "lib": ["ES2022"],
     "target": "ES2022",
-    "module": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "rootDir": "./src",
     "outDir": "./dist",
-    "moduleResolution": "NodeNext",
     "types": ["node", "jest"],
     "baseUrl": "./",
+    "paths": {
+      "*": ["*.js", "*.ts"]
+    },
     "newLine": "crlf",
     "declaration": true,
     "removeComments": true,
@@ -21,7 +24,7 @@
     "strict": true,
     "noImplicitAny": true,
     "preserveConstEnums": true,
-    "allowJs": false,
+    "allowJs": true,
     "strictNullChecks": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
@@ -30,16 +33,21 @@
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "isolatedModules": true,
+    "noEmitOnError": true,
     "alwaysStrict": true,
     "exactOptionalPropertyTypes": false,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
-    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "jsx": "react"
+    "jsx": "react",
+    "resolveJsonModule": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
 }
