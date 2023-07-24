@@ -1,18 +1,19 @@
 import axios from "axios";
 import {
   PriceDto,
-  SeatStatusDto,
   SeatDto,
+  SeatStatusDto,
   SectionDto,
-} from "src/models/dtos";
+} from "../models/dtos";
+import TicketApi from "./ticket.api.abstract";
 
-const ticketApi = () => {
-  const domain = process.env.DOMAIN || "https://my.laphil.com";
+class TicketApiImpl implements TicketApi  {
+  constructor(private _domain: string) { };
 
-  const fetchPrices = async (packegeId: Number): Promise<PriceDto[]> => {
+  public async fetchPrices (packegeId: Number): Promise<PriceDto[]> {
     try {
       const res = await axios.get(
-        `${domain}/en/rest-proxy/TXN/Packages/${packegeId}/Prices`
+        `${this._domain}/en/rest-proxy/TXN/Packages/${packegeId}/Prices`
       );
 
       return res.data;
@@ -21,10 +22,10 @@ const ticketApi = () => {
     }
   };
 
-  const fetchSeats = async (packegeId: Number): Promise<SeatDto[]> => {
+  public async fetchSeats (packegeId: Number): Promise<SeatDto[]> {
     try {
       const res = await axios.get(
-        `${domain}/en/rest-proxy/TXN/Packages/${packegeId}/Seats?constituentId=0&modeOfSaleId=26`
+        `${this._domain}/en/rest-proxy/TXN/Packages/${packegeId}/Seats?constituentId=0&modeOfSaleId=26`
       );
 
       return res.data;
@@ -33,10 +34,10 @@ const ticketApi = () => {
     }
   };
 
-  const fetchSections = async (): Promise<SectionDto[]> => {
+  public async fetchSections (): Promise<SectionDto[]> {
     try {
       const res = await axios.get(
-        `${domain}/en/rest-proxy/ReferenceData/Sections`
+        `${this._domain}/en/rest-proxy/ReferenceData/Sections`
       );
       return res.data;
     } catch (error) {
@@ -44,10 +45,10 @@ const ticketApi = () => {
     }
   };
 
-  const fetchSeatStatuses = async (): Promise<SeatStatusDto[]> => {
+  public async fetchSeatStatuses (): Promise<SeatStatusDto[]> {
     try {
       const res = await axios.get(
-        `${domain}/en/rest-proxy/ReferenceData/SeatStatuses`
+        `${this._domain}/en/rest-proxy/ReferenceData/SeatStatuses`
       );
 
       return res.data;
@@ -55,13 +56,6 @@ const ticketApi = () => {
       throw new Error("Failed to fetch seat statuses");
     }
   };
-
-  return Object.freeze({
-    fetchPrices,
-    fetchSeats,
-    fetchSections,
-    fetchSeatStatuses,
-  });
 };
 
-export default ticketApi();
+export default TicketApiImpl;

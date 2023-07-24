@@ -1,15 +1,20 @@
 import { Ticket } from "../../models/entities";
-import ticketApi from "../../api/ticket.api";
-import sectionService from "../sections/section.service";
-import priceService from "../prices/price.service";
-import sectionsService from "../sections/section.service";
+import SectionService from "../sections/section.service.abstract";
+import PriceService from "../prices/price.service.abstract";
+import TicketApi from "../../api/ticket.api.abstract";
 
-const ticketService = () => {
-  async function getTickets(eventId: number): Promise<Ticket[]> {
-    const seats = await ticketApi.fetchSeats(eventId);
+class TicketServiceImpl {
+  constructor(
+    private _ticketApi: TicketApi,
+    private _sectionService: SectionService,
+    private _priceService: PriceService
+  ) {}
 
-    await sectionService.fetchSections();
-    await priceService.fetchPrices(eventId);
+  public async getTickets(eventId: number): Promise<Ticket[]> {
+    const seats = await this._ticketApi.fetchSeats(eventId);
+
+    await this._sectionService.fetchSections();
+    await this._priceService.fetchPrices(eventId);
 
     return seats
       .filter((seat) => seat.SeatStatusId === 0)
@@ -18,13 +23,11 @@ const ticketService = () => {
           Id: seat.Id,
           SeatRow: seat.SeatRow,
           SeatNumber: seat.SeatNumber,
-          Price: priceService.findPriceByZoneId(seat.ZoneId).Price,
-          Section: sectionsService.findSectionById(seat.SectionId),
+          Price: this._priceService.findPriceByZoneId(seat.ZoneId).Price,
+          Section: this._sectionService.findSectionById(seat.SectionId),
         };
       });
   }
+}
 
-  return Object.freeze({ getTickets });
-};
-
-export default ticketService();
+export default TicketServiceImpl;

@@ -1,32 +1,29 @@
-import ticketApi from "../../api/ticket.api";
+import TicketApi from "src/api/ticket.api.abstract";
 import { Section } from "../../models/entities";
+import SectionService from "./section.service.abstract";
 
-const sectionService = () => {
-  let sections: Section[] = [];
+class SectionServiceImpl implements SectionService {
+  private _sections: Section[] = [];
 
-  const fetchSections = async (): Promise<Section[]> => {
-    sections = await ticketApi.fetchSections();
+  constructor(private _ticketApi: TicketApi) {};
 
-    return sections;
-  };
+  public async fetchSections(): Promise<Section[]> {
+    this._sections = await this._ticketApi.fetchSections();
 
-  const getSections = (): Section[] => {
-    return sections;
-  };
+    return this._sections;
+  }
 
-  const findSectionById = (sectionId: number): Section => {
-    const section = sections.find((el) => el.Id === sectionId);
+  public getSections(): Section[] {
+    return this._sections;
+  }
+
+  public findSectionById(sectionId: number): Section {
+    const section = this._sections.find((el) => el.Id === sectionId);
 
     if (!section) throw new Error("Could not find section by id");
 
     return section;
-  };
+  }
+}
 
-  return Object.freeze({
-    fetchSections,
-    getSections,
-    findSectionById,
-  });
-};
-
-export default sectionService();
+export default SectionServiceImpl;

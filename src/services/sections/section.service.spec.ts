@@ -1,10 +1,20 @@
+import TicketApiImpl from "../../api/ticket.api";
+import TicketApi from "../../api/ticket.api.abstract";
 import { sectionMock } from "../../mocks/entities.mock";
-import ticketApi from "../../api/ticket.api";
-import sectionService from "./section.service";
+import SectionServiceImpl from "./section.service";
+import SectionService from "./section.service.abstract";
 
 jest.mock("../../api/ticket.api");
 
 describe("pricesService", () => {
+  let ticketApi: TicketApi;
+  let sectionService: SectionService;
+
+  beforeAll(() => {
+    ticketApi = new TicketApiImpl("fakedomain");
+    sectionService = new SectionServiceImpl(ticketApi);
+  })
+
   beforeEach(() => {
     (ticketApi.fetchSections as jest.Mock).mockClear();
   });

@@ -1,10 +1,16 @@
 import axios from "axios";
 import { priceMock, seatMock, seatStatusMock, sectionMock } from "../mocks/entities.mock";
-import ticketApi from "./ticket.api";
+import TicketApiImpl from "./ticket.api";
+import TicketApi from "./ticket.api.abstract";
 
 jest.mock("axios");
 
 describe("ticketApi", () => {
+  let ticketApi: TicketApi;
+
+  beforeAll(() => {
+    ticketApi = new TicketApiImpl("fakedomain");
+  })
 
   beforeEach(() => {
     (axios.get as jest.Mock).mockClear();

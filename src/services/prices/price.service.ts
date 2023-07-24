@@ -1,34 +1,31 @@
-import ticketApi from "../../api/ticket.api";
+import TicketApi from "../../api/ticket.api.abstract";
 import { PriceDto } from "../../models/dtos";
+import PriceService from "./price.service.abstract";
 
-const priceService = () => {
-  let prices: PriceDto[] = [];
+class PriceServiceImpl implements PriceService {
+  private _prices: PriceDto[] = [];
 
-  const fetchPrices = async (packageId: Number): Promise<PriceDto[]> => {
-    prices = await ticketApi.fetchPrices(packageId);
+  constructor(private _ticketApi: TicketApi) {};
 
-    return prices;
-  };
+  public async fetchPrices(packageId: Number): Promise<PriceDto[]> {
+    this._prices = await this._ticketApi.fetchPrices(packageId);
 
-  const getPrices = (): PriceDto[] => {
-    return prices;
-  };
+    return this._prices;
+  }
 
-  const findPriceByZoneId = (ZoneId: number): PriceDto => {
-    const price = prices.find(
-      (el) => el.PerformanceId === 0 && el.ZoneId === ZoneId
+  public getPrices(): PriceDto[] {
+    return this._prices;
+  }
+
+  public findPriceByZoneId(zoneId: number): PriceDto {
+    const price = this._prices.find(
+      (el) => el.PerformanceId === 0 && el.ZoneId === zoneId
     );
 
     if (!price) throw new Error("Could not find price by ZoneId");
 
     return price;
-  };
+  }
+}
 
-  return Object.freeze({
-    fetchPrices,
-    getPrices,
-    findPriceByZoneId,
-  });
-};
-
-export default priceService();
+export default PriceServiceImpl;
